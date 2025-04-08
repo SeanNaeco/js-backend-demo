@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Backend Demo</title>
+</head>
+<body>
+    <h2>Send message to backend</h2>
+    <input type="text" id="message" placeholder="Type something..." />
+    <button onclick="sendToBackend()">Send</button>
+
+    <p id="response"></p>
+
+    <script>
+        function sendToBackend() {
+            const input = document.getElementById('message').value;
+
+            fetch('/api/data', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: input })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('response').innerText = data.reply;
+            });
+        }
+    </script>
+</body>
+</html>
